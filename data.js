@@ -2,6 +2,7 @@ export const ITEMS = [
   {
     id: 1,
     name: "Sea Aire Golf Course",
+    sport: "golf",
     location: "22730 Lupine Dr, Torrance, CA 90505",
     images: ["/assets/sea_aire_image_1.jpg", "/assets/sea_aire_image_2.png", "/assets/sea_aire_image_3.jpg"], //populate later
     rating: 4,
@@ -13,6 +14,7 @@ export const ITEMS = [
   {
     id: 2,
     name: "Wilson Park Tennis Courts",
+    sport: "tennis",
     location: "2300 Washington Ave, Torrance, CA 90501",
     images: ["/assets/wilson_park_image_1.png", "/assets/wilson_park_image_2.png", "/assets/wilson_park_image_3.png"],
     rating: 3.5,
@@ -24,6 +26,7 @@ export const ITEMS = [
   {
     id: 3,
     name: "Torrance Honda Wellness Center",
+    sport: "tennis",
     location: "1919 Torrance Blvd #100, Torrance, CA 90501",
     images: [], //add error handler or something for this cuz there are 0 pics online of this
     rating: 3,
@@ -35,6 +38,7 @@ export const ITEMS = [
   {
     id: 4,
     name: "Hollyglen Park",
+    sport: "tennis",
     location: "5255 137th St, Hawthorne, CA 90250",
     images: ["/assets/hollyglen_image_1.png", "/assets/hollyglen_image_2.png", "/assets/hollyglen_image_3.png"], 
     rating: 4,
@@ -46,6 +50,7 @@ export const ITEMS = [
   {
     id: 5,
     name: "The Islands Golf Center",
+    sport: "golf",
     location: "14893 E Ball Rd, Anaheim, CA 92806",
     images: ["/assets/islands_image_1.png", "/assets/islands_image_2.png", "/assets/islands_image_3.png"],
     rating: 3.5,
@@ -54,9 +59,10 @@ export const ITEMS = [
     review: `The Islands is a great place to meet up with friends after a long week and hit some balls over a large "lake" while enjoying some good food. The major con taking away from the rating is how popular this place is. If you are coming during peak hours, you WILL be waiting for a while for a spot to open up.`,
   },
 
-  {
+  { 
     id: 6,
     name: "Topgolf El Segundo",
+    sport: "golf",
     location: "400 Pacific Coast Hwy, El Segundo, CA 90245",
     images: ["/assets/topgolf_image_1.png", "/assets/topgolf_image_2.png", "/assets/topgolf_image_3.png"],
     rating: 2,

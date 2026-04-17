@@ -8,22 +8,34 @@
   </head>
 
   <body>
-    <header class="main-header">
-      <h1 class="title">South Bay Sports Venues</h1>  
+    <header class="header">
+      <div class="header-top">A Personal Catalogue of Places I've actually been</div>
+
+      <h1 class="header-title">
+        Sports<br><span>Venues</span>
+      </h1>
+    
+      <div class="header-corner">
+        <p>venues reviewed</p>
+        <strong id="header-count">6</strong>
+      </div>
+
     </header>
 
     <div id="card-container">
       
     </div>
 
+    <!-- template div for card, this is filled dynamically on webpage load by scripts -->
     <div class="card" style="display: none" value="" onclick="">
-        <div class="card-content">
-          <h2 class = "venue-name">Venue Name</h2>
-          <img class = "image-container" src="" alt="Venue Main Image" />
-          <p class="venue-information" style = "font-size: 20px;"></p>
-        </div>
+      <img class = "image-container" src="" alt="Venue Main Image" />
+      <div class="card-content">
+        <h2 class = "venue-name">Venue Name</h2>
+        <!-- <p class="venue-information" style = "font-size: 20px;"></p> -->
+        <div class = "venue-rating"></div>
 
       </div>
+    </div>
     
     <div class="footer">
       
