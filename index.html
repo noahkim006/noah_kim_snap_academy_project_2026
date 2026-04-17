@@ -22,15 +22,15 @@
     </header>
 
     <nav class="toolbar">
-      <button class="filter-btn active">All Venues</button>
-      <button class="filter-btn">Golf</button>
-      <button class="filter-btn">Tennis</button>
+      <button class="filter-btn" id = "reset-filter">All Venues</button>
+      <button class="filter-btn" id = "golf-filter">Golf</button>
+      <button class="filter-btn" id = "tennis-filter">Tennis</button>
       <div class="toolbar-right">
         <select class="sort-select" id="sort-select">
-          <option value="default">Default order</option>
-          <option value="rating-desc">Rating ↓</option>
-          <option value="rating-asc">Rating ↑</option>
-          <option value="name">A → Z</option>
+          <option value="default" id = reset-filter>Default order</option>
+          <option value="rating-desc" id = "sort-by-descending">Rating ↓</option>
+          <option value="rating-asc" id = "sort-by-ascending">Rating ↑</option>
+          <option value="name" id = "sort-by-alphabetical">A → Z</option>
         </select>
       </div>
     </nav>

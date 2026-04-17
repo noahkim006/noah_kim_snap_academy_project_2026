@@ -98,7 +98,7 @@ hr {
   align-items: center;        /* vertically center items */
 }
 
-.filter-btn {
+[class*=filter] {
   font-size: 12px;
   color: grey;
 
@@ -109,11 +109,12 @@ hr {
   cursor: pointer;
 }
 
-.filter-btn:hover {
+[class*=filter]:hover {
   color: whitesmoke;
 }
 
-.filter-btn.active {
+/* wildcard so can assign to all filters */
+[class*=filter].active {
   color: gold;
   border-bottom: 2px solid gold;
 }
