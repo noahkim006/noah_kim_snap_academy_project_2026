@@ -1,17 +1,28 @@
 import { ITEMS } from './data.js';
 
-let activeFilter = "default";
-
+let activeList = ITEMS;                                            //for later sorting functions
 
 const resetFilterButton = document.getElementById("reset-filter");
 const golfFilterButton  = document.getElementById("golf-filter"); 
 const tennisFilterButton = document.getElementById("tennis-filter");
+const headerCounter = document.getElementById("header-count");
 
 document.addEventListener("DOMContentLoaded", render());            //have the initalieze cards function run on the page loading to populate the card container div
 document.getElementById("reset-filter").addEventListener("click", () => render());
 document.getElementById("golf-filter").addEventListener("click", golfFilter);
 document.getElementById("tennis-filter").addEventListener("click", tennisFilter);
 
+document.getElementById("sort-select").addEventListener("change", (e) => {
+    const selectedSortOption = e.target.value;
+
+    if(selectedSortOption == "rating-desc") {
+        sortByRating(true);
+    } else if (selectedSortOption == "rating-asc") {
+        sortByRating(false);
+    } else {
+        render();
+    }
+})
 
 function createStars(rating) {
     let html = "";
@@ -33,11 +44,12 @@ function render(venues) {
 
     if (venues == undefined) {                                      //if an empty parameter is sent, we use default list, otherwise use the list that was sent as venues parameter
         venues = ITEMS;
+        activeList = venues;                                        //set the active list that is being used 
         
         resetFilterButton.classList.add("active");                  //set reset button as active - underline with css styling
         golfFilterButton.classList.remove("active");
         tennisFilterButton.classList.remove("active");
-
+        headerCounter.innerHTML = ITEMS.length;
     }                        
 
     const cardContainer = document.getElementById("card-container");
@@ -67,6 +79,9 @@ function render(venues) {
 
         card.dataset.id = currentVenue.id;                          //set ID of div id need later for functions
 
+        const venueInformation = card.querySelector(".venue-information");
+        venueInformation.textContent = currentVenue.review;
+
         const venueStars = card.querySelector(".venue-rating");
         venueStars.innerHTML = createStars(currentVenue.rating);
         
@@ -94,6 +109,9 @@ function golfFilter() {
         }
     }
 
+
+    activeList = filteredByGolf;
+    headerCounter.innerHTML = filteredByGolf.length;
     render(filteredByGolf);
 }
 
@@ -110,5 +128,41 @@ function tennisFilter() {
         }
     }
 
+    activeList = filteredByTennis;
+    headerCounter.innerHTML = filteredByTennis.length;
     render(filteredByTennis);
+}
+
+function sortByRating(byDescending) {
+
+    let sorted = activeList.slice();               //create shallow copy of acitvelist
+    let isSwapped;
+
+    if(byDescending == true) {   
+        do {                                       //implementaion of bubble sort - check two array elements, if the one to the right of index i is less than i, swap them so that the largest number flows tot he right
+            isSwapped = false;                
+            for(let i = 0; i < sorted.length - 1; i++) {
+                if(sorted[i].rating > sorted[i + 1].rating) {
+                    let temp = sorted[i];
+                    sorted[i] = sorted[i + 1];
+                    sorted[i + 1] = temp;
+                    isSwapped = true; 
+                }
+            }
+        } while (isSwapped);
+    } else {
+        do {                                       //just same bubble sort implementation but have the largest value float to the left ofthe array
+            isSwapped = false;                
+            for(let i = 0; i < sorted.length - 1; i++) {
+                if(sorted[i].rating < sorted[i + 1].rating) {
+                    let temp = sorted[i];
+                    sorted[i] = sorted[i + 1];
+                    sorted[i + 1] = temp;
+                    isSwapped = true; 
+                }
+            }
+        } while (isSwapped);
+    }
+    
+    render(sorted)
 }
