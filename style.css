@@ -230,4 +230,66 @@ hr {
   padding: 14px 24px;
 }
 
+#popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #191913;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup box */
+.venue-info-template {
+  background-color: whitesmoke;
+  border: 2px solid gold;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.venue-info-template .venue-title {
+  font-size: 28px;
+  color: #191913;
+  margin: 0 0 16px 0;
+}
+
+.venue-info-template .venue-image-large {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  background-color: midnightblue;
+}
+
+.venue-info-template .placeholder-image {
+  object-fit: contain;
+}
+
+/* Close button */
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #191913;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+}
+
+.popup-close:hover {
+  color: gold;
+}
+
+
+
 

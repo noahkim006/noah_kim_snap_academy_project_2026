@@ -37,6 +37,11 @@
       </div>
     </nav>
 
+
+    <div id = "popup-container">
+      
+    </div>
+
     <div id="card-container">
       
     </div>
@@ -48,9 +53,20 @@
         <h2 class = "venue-name">Venue Name</h2>
         <p class= "venue-information"></p>
         <div class = "venue-rating"></div>
-
       </div>
     </div>
+
+    <!-- template div for popup container, this is built dynamically by js scripts -->
+    <div class = "venue-info-template" style = "display: none">
+      <h2 class = "venue-title">P</h2>
+      <button class = "popup-close" id = "popup-close">x</button>
+      <img class = "venue-image-large" src = "" alt = "Venue Image (Large)"/>
+      <div class = "venue-info-container">
+        <p class = "venue-full-review"></p>
+        <div class = "venue-full-rating"></div>
+      </div>
+    </div>
+
     
     <div class="footer">
       

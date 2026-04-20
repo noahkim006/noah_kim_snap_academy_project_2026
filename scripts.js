@@ -6,6 +6,8 @@ const resetFilterButton = document.getElementById("reset-filter");
 const golfFilterButton  = document.getElementById("golf-filter"); 
 const tennisFilterButton = document.getElementById("tennis-filter");
 const headerCounter = document.getElementById("header-count");
+const popupContainer = document.getElementById("popup-container");
+const popupCloseButton = document.getElementById("popup-close");
 
 document.addEventListener("DOMContentLoaded", render());            //have the initalieze cards function run on the page loading to populate the card container div
 document.getElementById("reset-filter").addEventListener("click", () => render());
@@ -97,12 +99,52 @@ function render(venues) {
 
         card.addEventListener("click", () => {                      //handle click event for each individual card and their data
             // console.log(currentVenue);
-
+            console.log("aaa" + currentVenue.name);
+            createVenuePopup(currentVenue);
         })
 
         cardContainer.appendChild(card);                            //add to parent div
     }
-}   
+}  
+
+function createVenuePopup(venueObject) {
+    const popupTemplate = document.querySelector(".venue-info-template");
+    const popup = popupTemplate.cloneNode(true);
+    popup.style.display = "block";
+
+    const venueName = popup.querySelector(".venue-title");
+    venueName.textContent = venueObject.name;
+
+    const closeButton = popup.querySelector(".popup-close");
+    closeButton.addEventListener("click", (e) => {
+        if(e.target === closeButton) {
+        popupContainer.innerHTML = "";
+        popupContainer.style.display = "none";
+        }
+    });
+
+    const venueImage = popup.querySelector(".venue-image-large");
+    if(venueObject.images.length == 0) {                                 //if images array is empty, use placeholder as main image
+            
+            venueImage.classList.add("placeholder-image")                //add this as class so can scale the placehodler image better for the size of the card
+            venueImage.src = `/assets/${venueObject.sport}_placeholder.png`;
+        } else {
+            venueImage.src = venueObject.images[0];
+    }
+
+    const venueStars = popup.querySelector(".venue-full-rating");
+    venueStars.innerHTML = createStars(venueObject.rating);
+
+
+
+
+
+
+    
+    popupContainer.style.display = "flex";
+    popupContainer.appendChild(popup);
+}
+
 
 function golfFilter() {
     let filteredByGolf = [];
