@@ -19,6 +19,8 @@ document.getElementById("sort-select").addEventListener("change", (e) => {
         sortByRating(true);
     } else if (selectedSortOption == "rating-asc") {
         sortByRating(false);
+    } else if (selectedSortOption == "alphabetical") {
+        sortByAlphabetical();
     } else {
         render();
     }
@@ -91,10 +93,16 @@ function render(venues) {
         numericalRating.innerHTML = `<span class = "decimal-rating">${currentVenueRating}</span>`;
         venueStars.appendChild(numericalRating);
 
+        cardTemplate.value = currentVenue;
+
+        card.addEventListener("click", () => {                      //handle click event for each individual card and their data
+            // console.log(currentVenue);
+
+        })
+
         cardContainer.appendChild(card);                            //add to parent div
     }
 }   
-
 
 function golfFilter() {
     let filteredByGolf = [];
@@ -161,8 +169,27 @@ function sortByRating(byDescending) {
                     isSwapped = true; 
                 }
             }
-        } while (isSwapped);
+        } while(isSwapped);
     }
     
     render(sorted)
+}
+
+function sortByAlphabetical() {
+    let sorted = activeList.slice();                //create shallow copy of active list
+    let isSwapped;
+
+    do {
+        isSwapped = false;
+        for(let i = 0; i < sorted.length - 1; i++) {
+            if(sorted[i].name > sorted[i + 1].name) {
+                let temp = sorted[i];
+                sorted[i] = sorted[i + 1];
+                sorted[i + 1] = temp;
+                isSwapped = true; 
+            }
+        }
+    } while(isSwapped);
+
+    render(sorted);
 }
