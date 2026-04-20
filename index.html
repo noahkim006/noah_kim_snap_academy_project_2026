@@ -9,6 +9,8 @@
 
   <body>
     <header class="header">
+      <div class = "header-circle"></div>
+      <div class = "header-circle-2"></div>
       <div class="header-top">A Personal Catalogue of Places I've actually been</div>
   
       <h1 class="header-title">
@@ -20,17 +22,17 @@
         <strong id="header-count">6</strong>
       </div>
     </header>
-
+    
     <nav class="toolbar">
       <button class="filter-btn" id = "reset-filter">All Venues</button>
       <button class="filter-btn" id = "golf-filter">Golf</button>
       <button class="filter-btn" id = "tennis-filter">Tennis</button>
       <div class="toolbar-right">
-        <select class="sort-select" id="sort-select">
-          <option value="default" id = reset-filter>Default order</option>
-          <option value="rating-desc" id = "sort-by-descending">Rating ↓</option>
-          <option value="rating-asc" id = "sort-by-ascending">Rating ↑</option>
-          <option value="name" id = "sort-by-alphabetical">A → Z</option>
+        <select class="sort-select"    id="sort-select">
+          <option value="default"      id = reset-filter>Default order</option>
+          <option value="rating-desc"  id = "sort-by-descending">Rating ↓</option>
+          <option value="rating-asc"   id = "sort-by-ascending">Rating ↑</option>
+          <option value="alphabetical" id = "sort-by-alphabetical">A → Z</option>
         </select>
       </div>
     </nav>
@@ -40,11 +42,11 @@
     </div>
 
     <!-- template div for card, this is filled dynamically on webpage load by scripts -->
-    <div class="card" style="display: none" value="" onclick="">
+    <div class="card" style="display: none" value= "" onclick={}>
       <img class = "image-container" src="" alt="Venue Main Image" />
       <div class="card-content">
         <h2 class = "venue-name">Venue Name</h2>
-        <!-- <p class="venue-information" style = "font-size: 20px;"></p> -->
+        <p class= "venue-information"></p>
         <div class = "venue-rating"></div>
 
       </div>
