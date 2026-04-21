@@ -35,7 +35,7 @@ function createStars(rating) {
         if (i + 1 <= rating) {
             html += "★";
         } else if (i + 0.5 === rating) {
-            html += `<span class="half-star">★</span>`;
+            html += `<span class="half-star"><span class="half-fill">★</span><span class="half-empty">★</span></span>`;
         } else {
             html += `<span class="empty-star">★</span>`;
         }
@@ -107,7 +107,7 @@ function render(venues) {
     }
 }  
 
-function createVenuePopup(venueObject) {
+function createVenuePopup(venueObject) {                            //EXTREMELEY MESSY FUNCTION - BASIC IDEA IS THAT IT DYNAMICALLY CREATES POPUP WINDOW AND POPULATED BASED ON WHICH VENUE IS CLICKED BY THE USER
     const popupTemplate = document.querySelector(".venue-info-template");
     const popup = popupTemplate.cloneNode(true);
     popup.style.display = "block";
@@ -131,6 +131,8 @@ function createVenuePopup(venueObject) {
         } else {
             venueImage.src = venueObject.images[0];
     }
+    const venueAddress =popup.querySelector(".venue-address");
+    venueAddress.textContent = venueObject.location;
 
     const venueStars = popup.querySelector(".venue-full-rating");
     venueStars.innerHTML = createStars(venueObject.rating);
@@ -144,19 +146,18 @@ function createVenuePopup(venueObject) {
 
 
     // DOES NOT WORK@@@@
-    // for(let i = 0; i < venueObject.pros.length; i++) {
-    //     const listElement = document.createElement("li");
-    //     // listElement.innerText = venueObject.pros[i];
-    //     listElement.appendChild(document.createTextNode(venueObject.pros[i]));
+    for(let i = 0; i < venueObject.pros.length; i++) {
+        const listElement = document.createElement("li");
+        listElement.appendChild(document.createTextNode(venueObject.pros[i]));
 
-    //     prosList.appendChild(listElement);
-    // }
+        prosList.appendChild(listElement);
+    }
 
-    //  for(let i = 0; i < venueObject.cons.length; i++) {
-    //     const listElement = document.createElement("li");
-    //     listElement.innerText = venueObject.cons[i];
-    //     consList.appendChild(listElement);
-    // }
+     for(let i = 0; i < venueObject.cons.length; i++) {
+        const listElement = document.createElement("li");
+        listElement.innerText = venueObject.cons[i];
+        consList.appendChild(listElement);
+    }
 
     
     popupContainer.style.display = "flex";
