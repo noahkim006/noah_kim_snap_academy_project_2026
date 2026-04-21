@@ -293,6 +293,47 @@ hr {
 
 }
 
+.popup-image-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.popup-image-container .venue-image-large {
+  margin-bottom: 0;
+}
+
+.image-scroll-back,
+.image-scroll-forwards {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(25, 25, 19, 0.5);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  transition: background-color 0.2s;
+}
+
+.image-scroll-back {
+  left: 12px;
+}
+
+.image-scroll-forwards {
+  right: 12px;
+}
+
+.image-scroll-back:hover,
+.image-scroll-forwards:hover {
+  background-color: rgba(25, 25, 19, 0.8);
+}
+
 .venue-info-template .placeholder-image {
   object-fit: contain;
 }
