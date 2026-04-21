@@ -6,6 +6,8 @@ const resetFilterButton = document.getElementById("reset-filter");
 const golfFilterButton  = document.getElementById("golf-filter"); 
 const tennisFilterButton = document.getElementById("tennis-filter");
 const headerCounter = document.getElementById("header-count");
+const popupContainer = document.getElementById("popup-container");
+const popupCloseButton = document.getElementById("popup-close");
 
 document.addEventListener("DOMContentLoaded", render());            //have the initalieze cards function run on the page loading to populate the card container div
 document.getElementById("reset-filter").addEventListener("click", () => render());
@@ -33,7 +35,7 @@ function createStars(rating) {
         if (i + 1 <= rating) {
             html += "★";
         } else if (i + 0.5 === rating) {
-            html += `<span class="half-star">★</span>`;
+            html += `<span class="half-star"><span class="half-fill">★</span><span class="half-empty">★</span></span>`;
         } else {
             html += `<span class="empty-star">★</span>`;
         }
@@ -97,12 +99,71 @@ function render(venues) {
 
         card.addEventListener("click", () => {                      //handle click event for each individual card and their data
             // console.log(currentVenue);
-
+            console.log("aaa" + currentVenue.name);
+            createVenuePopup(currentVenue);
         })
 
         cardContainer.appendChild(card);                            //add to parent div
     }
-}   
+}  
+
+function createVenuePopup(venueObject) {                            //EXTREMELEY MESSY FUNCTION - BASIC IDEA IS THAT IT DYNAMICALLY CREATES POPUP WINDOW AND POPULATED BASED ON WHICH VENUE IS CLICKED BY THE USER
+    const popupTemplate = document.querySelector(".venue-info-template");
+    const popup = popupTemplate.cloneNode(true);
+    popup.style.display = "block";
+
+    const venueName = popup.querySelector(".venue-title");
+    venueName.textContent = venueObject.name;
+
+    const closeButton = popup.querySelector(".popup-close");
+    closeButton.addEventListener("click", (e) => {
+        if(e.target === closeButton) {
+        popupContainer.innerHTML = "";
+        popupContainer.style.display = "none";
+        }
+    });
+
+    const venueImage = popup.querySelector(".venue-image-large");
+    if(venueObject.images.length == 0) {                                 //if images array is empty, use placeholder as main image
+            
+            venueImage.classList.add("placeholder-image")                //add this as class so can scale the placehodler image better for the size of the card
+            venueImage.src = `/assets/${venueObject.sport}_placeholder.png`;
+        } else {
+            venueImage.src = venueObject.images[0];
+    }
+    const venueAddress =popup.querySelector(".venue-address");
+    venueAddress.textContent = venueObject.location;
+
+    const venueStars = popup.querySelector(".venue-full-rating");
+    venueStars.innerHTML = createStars(venueObject.rating);
+
+    const fullReview = popup.querySelector(".venue-full-review");
+    fullReview.textContent = venueObject.review;
+
+
+    const prosList = popup.querySelector(".pros-list");
+    const consList = popup.querySelector(".cons-list");
+
+
+    // DOES NOT WORK@@@@
+    for(let i = 0; i < venueObject.pros.length; i++) {
+        const listElement = document.createElement("li");
+        listElement.appendChild(document.createTextNode(venueObject.pros[i]));
+
+        prosList.appendChild(listElement);
+    }
+
+     for(let i = 0; i < venueObject.cons.length; i++) {
+        const listElement = document.createElement("li");
+        listElement.innerText = venueObject.cons[i];
+        consList.appendChild(listElement);
+    }
+
+    
+    popupContainer.style.display = "flex";
+    popupContainer.appendChild(popup);
+}
+
 
 function golfFilter() {
     let filteredByGolf = [];
