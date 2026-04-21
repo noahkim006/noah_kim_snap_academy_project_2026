@@ -100,6 +100,7 @@ function render(venues) {
             image.classList.add("placeholder-image")                //add this as class so can scale the placehodler image better for the size of the card
             image.src = `./assets/${currentVenue.sport}_placeholder.png`;
         } else {
+            image.classList.remove("placeholder-image");
             image.src = currentVenue.images[0];
         }
 
@@ -131,7 +132,7 @@ function render(venues) {
     }
 }  
 
-function createVenuePopup(venueObject) {                                //EXTREMELEY MESSY FUNCTION - BASIC IDEA IS THAT IT DYNAMICALLY CREATES POPUP WINDOW AND POPULATED BASED ON WHICH VENUE IS CLICKED BY THE USER
+function createVenuePopup(venueObject) {                            //EXTREMELEY MESSY FUNCTION - BASIC IDEA IS THAT IT DYNAMICALLY CREATES POPUP WINDOW AND POPULATED BASED ON WHICH VENUE IS CLICKED BY THE USER
     const popupTemplate = document.querySelector(".venue-info-template");
     const popup = popupTemplate.cloneNode(true);
     popup.style.display = "block";
