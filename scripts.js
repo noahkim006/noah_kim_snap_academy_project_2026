@@ -1,6 +1,8 @@
 import { ITEMS } from './data.js';
 
 let activeList = ITEMS;                                            //for later sorting functions
+let popupImageIndex = 0;                                           //all popup images use the first image in array element 
+let openPopupVenue = null;
 
 const resetFilterButton = document.getElementById("reset-filter");
 const golfFilterButton  = document.getElementById("golf-filter"); 
@@ -10,6 +12,7 @@ const popupContainer = document.getElementById("popup-container");
 const popupCloseButton = document.getElementById("popup-close");
 
 document.addEventListener("DOMContentLoaded", render());            //have the initalieze cards function run on the page loading to populate the card container div
+
 document.getElementById("reset-filter").addEventListener("click", () => render());
 document.getElementById("golf-filter").addEventListener("click", golfFilter);
 document.getElementById("tennis-filter").addEventListener("click", tennisFilter);
@@ -27,6 +30,25 @@ document.getElementById("sort-select").addEventListener("change", (e) => {
         render();
     }
 })
+
+function imageScrollHandler(scrollValue, popup) {
+    
+    const image = popup.querySelector(".venue-image-large");
+
+    let newIndex = popupImageIndex + scrollValue;
+    
+    if(newIndex < 0) {
+        newIndex = openPopupVenue.images.length - 1;
+    } else if(newIndex >= openPopupVenue.images.length) {
+        newIndex = 0;
+    }
+    
+    console.log(newIndex);
+
+    popupImageIndex = newIndex;
+    image.src = openPopupVenue.images[popupImageIndex];
+}
+
 
 function createStars(rating) {
     let html = "";
@@ -78,6 +100,7 @@ function render(venues) {
             image.classList.add("placeholder-image")                //add this as class so can scale the placehodler image better for the size of the card
             image.src = `./assets/${currentVenue.sport}_placeholder.png`;
         } else {
+            image.classList.remove("placeholder-image");
             image.src = currentVenue.images[0];
         }
 
@@ -101,6 +124,8 @@ function render(venues) {
             // console.log(currentVenue);
             console.log("aaa" + currentVenue.name);
             createVenuePopup(currentVenue);
+            openPopupVenue = currentVenue;                          //set the currently open venue as the one clicke don by user 
+            
         })
 
         cardContainer.appendChild(card);                            //add to parent div
@@ -120,8 +145,21 @@ function createVenuePopup(venueObject) {                            //EXTREMELEY
         if(e.target === closeButton) {
         popupContainer.innerHTML = "";
         popupContainer.style.display = "none";
+        popupImageIndex = 0;                                
+        openPopupVenue = null;                                           //clear the variables used to hold the current open venue
         }
     });
+
+    const scrollBackBtn = popup.querySelector(".image-scroll-back");
+    const scrollForwardsBtn = popup.querySelector(".image-scroll-forwards");
+
+    if(venueObject.images.length > 1) {                                  //if there are more than 1 image, give users the option to scroll images
+        scrollBackBtn.addEventListener("click", () => imageScrollHandler(-1, popup));
+        scrollForwardsBtn.addEventListener("click", () => imageScrollHandler(1, popup));
+    } else {
+        scrollBackBtn.style.display = "none";
+        scrollForwardsBtn.style.display = "none";
+    }
 
     const venueImage = popup.querySelector(".venue-image-large");
     if(venueObject.images.length == 0) {                                 //if images array is empty, use placeholder as main image
@@ -131,7 +169,8 @@ function createVenuePopup(venueObject) {                            //EXTREMELEY
         } else {
             venueImage.src = venueObject.images[0];
     }
-    const venueAddress =popup.querySelector(".venue-address");
+
+    const venueAddress = popup.querySelector(".venue-address");
     venueAddress.textContent = venueObject.location;
 
     const venueStars = popup.querySelector(".venue-full-rating");
@@ -145,7 +184,6 @@ function createVenuePopup(venueObject) {                            //EXTREMELEY
     const consList = popup.querySelector(".cons-list");
 
 
-    // DOES NOT WORK@@@@
     for(let i = 0; i < venueObject.pros.length; i++) {
         const listElement = document.createElement("li");
         listElement.appendChild(document.createTextNode(venueObject.pros[i]));
