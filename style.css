@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
 html, body {
   margin: 0;
   padding: 0;
+  font-family: 'Outfit', sans-serif;
 }
 
 header {
@@ -16,7 +19,7 @@ header {
   justify-content: flex-end;
   position: relative;
   overflow: hidden;
-  border-bottom: 2px solid #c9a84c;
+  border-bottom: 2px solid gold;
 }
 
 .header-circle,
@@ -52,10 +55,12 @@ header {
 }
 
 h1 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: clamp(3.5rem, 10vw, 7rem); /* make it scale with screens ize*/
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: mintcream;
-  line-height: 0.92;
+  line-height: 0.95;
   padding-bottom: 32px;
   margin: 0;
 }
@@ -79,8 +84,9 @@ h1 span {
 }
 /* for the counter */
 .header-corner strong {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 28px;
+  font-weight: 700;
   color: mintcream;
   display: block;
 }
@@ -104,20 +110,21 @@ hr {
 .toolbar {
   background-color: #191913;
   padding: 10px 40px;
-
   display: flex;              
   align-items: center;        
 }
 
 [class*=filter] {
+  font-family: 'Outfit', sans-serif;
   font-size: 12px;
   color: grey;
-
   background: none;
   border: none;
-  padding: 10px 15px;
-
+  padding: 8px 15px;
   cursor: pointer;
+  border-radius: 6px;
+  letter-spacing: 0.03em;
+  
 }
 
 [class*=filter]:hover {
@@ -127,7 +134,7 @@ hr {
 /* wildcard so can assign to all filters */
 [class*=filter].active {
   color: gold;
-  border-bottom: 2px solid gold;
+  background: rgba(201, 168, 76, 0.1);
 }
 
 .toolbar-right {
@@ -138,13 +145,15 @@ hr {
 }
 
 .sort-select {
+  font-family: 'Outfit', sans-serif;
   font-size: 12px;
-  padding: 5px;
+  padding: 6px 10px;
 
   background-color: #191913;
   color: white;
 
   border: 1px solid gold;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -155,18 +164,22 @@ hr {
 .card {
   width: 300px;
   border: 1.5px solid grey;
+  border-radius: 14px;
   cursor: pointer;
   background-color: whitesmoke;
+  overflow: hidden;
+  transition: border-color 0.15s, transform 0.15
 }
 .card:hover {
   border-color: #aaa;
   background-color: rgb(246, 240, 240);
+  transform: translateY(-2px);
 }
 
 .card img {
   width: 100%;
   height: 180px;
-  object-fit: cover;  
+  object-fit: fill;  
   display: block;     
 
   /* placeholder images have a transparent background, so this covers that case */
@@ -185,11 +198,17 @@ hr {
 }
 
 .venue-name {
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1a1a12;
   margin: 0;
 }
 /* truncate review to 3 lines  */
 .venue-information {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.55;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
@@ -218,6 +237,7 @@ hr {
 }
 
 .decimal-rating {
+  font-family: 'DM Mono', monospace;
   font-size: 13px;
   color: #666;
   margin-left: 4px;
@@ -247,6 +267,7 @@ hr {
 .venue-info-template {
   background-color: whitesmoke;
   border: 2px solid gold;
+  border-radius: 16px;
   padding: 24px;
   max-width: 500px;
   width: 90%;
@@ -273,7 +294,6 @@ hr {
   object-fit: contain;
 }
 
-/* Close button */
 .popup-close {
   position: absolute;
   top: 12px;

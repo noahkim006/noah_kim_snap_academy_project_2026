@@ -135,10 +135,28 @@ function createVenuePopup(venueObject) {
     const venueStars = popup.querySelector(".venue-full-rating");
     venueStars.innerHTML = createStars(venueObject.rating);
 
+    const fullReview = popup.querySelector(".venue-full-review");
+    fullReview.textContent = venueObject.review;
 
 
+    const prosList = popup.querySelector(".pros-list");
+    const consList = popup.querySelector(".cons-list");
 
 
+    // DOES NOT WORK@@@@
+    // for(let i = 0; i < venueObject.pros.length; i++) {
+    //     const listElement = document.createElement("li");
+    //     // listElement.innerText = venueObject.pros[i];
+    //     listElement.appendChild(document.createTextNode(venueObject.pros[i]));
+
+    //     prosList.appendChild(listElement);
+    // }
+
+    //  for(let i = 0; i < venueObject.cons.length; i++) {
+    //     const listElement = document.createElement("li");
+    //     listElement.innerText = venueObject.cons[i];
+    //     consList.appendChild(listElement);
+    // }
 
     
     popupContainer.style.display = "flex";
